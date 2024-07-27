@@ -113,7 +113,7 @@ import math
 
 # Initialize HandDetector and Classifier
 detector = HandDetector(maxHands=1)
-classifier = Classifier("Model_ASL/keras_model.h5", "Model_ASL/labels.txt")
+classifier = Classifier("keras_model.h5", "labels.txt")
 
 # Constants for image processing
 offset = 20
