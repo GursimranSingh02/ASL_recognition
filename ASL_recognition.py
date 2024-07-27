@@ -81,8 +81,8 @@
 
 
 import streamlit as st
-import cv2
 from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, WebRtcMode
+import cv2
 from cvzone.HandTrackingModule import HandDetector
 from cvzone.ClassificationModule import Classifier
 import numpy as np
@@ -90,7 +90,7 @@ import math
 
 # Initialize HandDetector and Classifier
 detector = HandDetector(maxHands=1)
-classifier = Classifier("keras_model.h5", "labels.txt")
+classifier = Classifier("Model_ASL/keras_model.h5", "Model_ASL/labels.txt")
 
 # Constants for image processing
 offset = 20
@@ -102,7 +102,7 @@ labels = ["A", "B", "C", "Calm down", "D", "E", "F", "G", "H", "Hello", "I", "I 
 class VideoProcessor(VideoProcessorBase):
     def __init__(self):
         self.detector = HandDetector(maxHands=1)
-        self.classifier = Classifier("keras_model.h5", "labels.txt")
+        self.classifier = Classifier("Model_ASL/keras_model.h5", "Model_ASL/labels.txt")
         self.offset = 20
         self.imgSize = 300
         self.labels = labels
@@ -150,6 +150,10 @@ def main():
         async_processing=True,
     )
 
+    if webrtc_ctx.video_processor:
+        st.write("Camera is on.")
+    else:
+        st.write("Camera is off.")
+
 if __name__ == '__main__':
     main()
-
