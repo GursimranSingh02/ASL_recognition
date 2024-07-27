@@ -84,7 +84,6 @@ from cvzone.HandTrackingModule import HandDetector
 from cvzone.ClassificationModule import Classifier
 import numpy as np
 import math
-import tensorflow as tf
 
 # Initialize HandDetector and Classifier
 detector = HandDetector(maxHands=1)
@@ -146,6 +145,9 @@ def main():
         video_processor_factory=VideoProcessor,
         media_stream_constraints={"video": True, "audio": False},
         async_processing=True,
+        rtc_configuration={
+            "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+        },
     )
 
     if webrtc_ctx.video_processor:
